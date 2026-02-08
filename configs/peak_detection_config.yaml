@@ -1,0 +1,54 @@
+output_folder: results/peak_detection_experiment
+seed: 42
+ptt_ppg_path: /mnt/share/Scratch/Haidamous/datasets/pulse-transit-time-ppg/1.1.0
+gudb_path: /home/jhaidamous/CorruptedECGDatasets/gudb/docs/experiment_data
+f1_tol: 0.02
+device: "cuda"
+signal: "ecg"
+model:
+  model_name: xgboost_reg
+  classification: false
+  output_clip: # Only relevant if the model is a regressor. Serves to clip the neural network output in case the regression target is bounded.
+  - 0
+  - 1
+  hyperparameters:
+    eta: 0.3
+cv:
+  param_grid:
+    max_depth: 
+    - 5
+    - 7
+    - 9
+    - 11
+    n_estimators: 
+    - 100
+    - 500
+    - 1000
+psqi:
+  f_highpass: 0.5
+  local_snr: 10
+  global_snr: 25
+  maxiter: 2
+  popsize: 5
+  random_state: 42
+ecgfounder:
+  ckpt_path: /home/jhaidamous/CorruptedECGDatasets/ckpts/1_lead_ECGFounder.pth
+  batch_size: 64
+  classification: false
+  n_classes: 2 # Only relevant if classification is true
+  output_clip: # Only relevant if classification is false. Serves to clip the neural network output in case the regression target is bounded.
+  - 0
+  - 1
+  epochs: 50
+  patience: 5
+  train_test_split:
+    test_size: 0.2
+    random_state: 42
+    shuffle: true
+  optimizer:
+    lr: 5.0e-6
+    betas:
+    - 0.9
+    - 0.999
+    eps: 1.0e-8
+    weight_decay: 1.0e-2

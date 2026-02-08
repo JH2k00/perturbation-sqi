@@ -1,0 +1,46 @@
+output_folder: results/psqi_hyperparameter_experiment
+seed: 42
+gudb_path: /home/jhaidamous/CorruptedECGDatasets/gudb/docs/experiment_data
+mit_bih_af_path: /mnt/share/Scratch/Haidamous/datasets/mit-bih-atrial-fibrillation-database-1.0.0/files/
+deepbeat_path: /mnt/share/Scratch/deepbeat/test.npz
+f1_tol: 0.02
+device: "cuda"
+siamaf_batch_size: 256
+siamaf_ckpt_path: ckpts/final_model.pt
+psqi:
+  f_highpass: 0.5
+  local_snr: 0
+  global_snr: 
+  - 0
+  - 5
+  - 10
+  - 15
+  - 20
+  - 25
+  - 30
+  - 35
+  - 40
+  maxiter: 2
+  popsize: 5
+  random_state: 42
+ecgfounder:
+  ckpt_path: /home/jhaidamous/CorruptedECGDatasets/ckpts/1_lead_ECGFounder.pth
+  batch_size: 256
+  classification: true
+  n_classes: 2 # Only relevant if classification is true
+  output_clip: # Only relevant if classification is false. Serves to clip the neural network output in case the regression target is bounded.
+  - 0
+  - 1
+  epochs: 50
+  patience: 5
+  train_test_split:
+    test_size: 0.2
+    random_state: 42
+    shuffle: true
+  optimizer:
+    lr: 5.0e-6
+    betas:
+    - 0.9
+    - 0.999
+    eps: 1.0e-8
+    weight_decay: 1.0e-2
