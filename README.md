@@ -13,17 +13,6 @@ pip install -r requirements.txt
 ```
 A CUDA compatible GPU is recommended for the comparison with the dSQI using PyTorch.
 
-## Benchmarks
-Run ```python peak_detection_experiment.py --config_path configs/peak_detection_config.yaml``` to reproduce the R-peak detection experiment.
-
-Run ```python ecg_atrial_fibrillation_experiment.py --config_path configs/ecg_atrial_fibrillation_config.yaml``` to reproduce the ECG AF classification experiment.
-
-Run ```python ppg_atrial_fibrillation_experiment.py --config_path configs/ppg_atrial_fibrillation_config.yaml``` to reproduce the ECG AF classification experiment.
-
-Run ```python psqi_hyperparameter_experiment.py --config_path configs/psqi_hyperparameters/psqi_hyperparameter_config_local_snr_0.yaml``` to reproduce the pSQI hyperparameter experiments. Replace "0" with the local SNR value of your choice. The sweep in the python code is done over the global SNR.
-
-The plots from the paper can be reproduced with the ```visualizations.ipynb``` notebook.
-
 ## Perturbation SQI
 The following is a minimal usage example for the pSQI on the R-peak detection task using the FastNVG algorithm and the F1 metric.
 ```python
@@ -61,3 +50,14 @@ centers = (edges[:-1] + edges[1:]) / 2
 print(f"Spearman Correlation Coefficient: {spearmanr(centers[np.isfinite(stats)], stats[np.isfinite(stats)])[0]:.3f}")
 print(f"Optimal Separation Margin: {get_best_margin(metrics, preds)[0]:.3f}")
 ```
+
+## Benchmarks
+Run ```python peak_detection_experiment.py --config_path configs/peak_detection_config.yaml``` to reproduce the R-peak detection experiment.
+
+Run ```python ecg_atrial_fibrillation_experiment.py --config_path configs/ecg_atrial_fibrillation_config.yaml``` to reproduce the ECG AF classification experiment.
+
+Run ```python ppg_atrial_fibrillation_experiment.py --config_path configs/ppg_atrial_fibrillation_config.yaml``` to reproduce the PPG AF classification experiment.
+
+Run ```python psqi_hyperparameter_experiment.py --config_path configs/psqi_hyperparameters/psqi_hyperparameter_config_local_snr_0.yaml``` to reproduce the pSQI hyperparameter experiments. Replace "0" with the local SNR value of your choice. The sweep in the python code is done over the global SNR.
+
+The plots from the paper can be reproduced with the ```visualizations.ipynb``` notebook.
