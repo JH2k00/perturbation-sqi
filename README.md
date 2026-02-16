@@ -1,5 +1,14 @@
 # Task and Metric Specific Signal Quality Indices for Medical Time-Series
 
+<p>
+    <a href="https://www.etit.tu-darmstadt.de/kismed/team_kismed/haidamousjad.en.jsp">Jad Haidamous</a>,
+    <a href="https://www.etit.tu-darmstadt.de/kismed/team_kismed/hoog_antink.en.jsp">Christoph Hoog Antink</a>
+</p>
+
+<h3>
+    <a href="https://arxiv.org/abs/2602.12478">Paper</a>
+</h3>
+
 ![pSQI R-peak detection example](worst_ecgs_peak_detection_readme.svg)
 
 This repository contains the reference implementation for the perturbation based task- and metric-specific signal quality index (pSQI). Given an algorithm and a metric that rates the algorithm's output w.r.t. a ground truth, the pSQI has been empirically shown to correlate with the algorithm's performance on a given input signal, as evaluated by the metric. The pSQI has been evaluated on three benchmarks: R-peak detection, ECG-based atrial fibrillation classification, and PPG-based atrial fibrillation classification. 
